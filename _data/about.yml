@@ -1,0 +1,43 @@
+# ─────────────────────────────────────────────────────────
+# ABOUT US content -- edit this file to update the About page.
+# No HTML knowledge needed, just fill in the fields below.
+# To add more people to a group, copy an existing "- name: ..."
+# block and change the details. To remove someone, delete their block.
+# ─────────────────────────────────────────────────────────
+
+intro: >
+  Welcome to the Asia Basketball Association -- write a couple of
+  sentences here about the league: when it started, what it's about,
+  and what makes it worth following.
+
+groups:
+  - title: Commissioner
+    people:
+      - name: Full Name
+        role: Commissioner
+
+  - title: Co-Commissioners
+    people:
+      - name: Full Name
+        role: Co-Commissioner
+      - name: Full Name
+        role: Co-Commissioner
+
+  - title: Referees
+    people:
+      - name: Full Name
+        role: Head Referee
+      - name: Full Name
+        role: Referee
+
+  - title: Media Team
+    people:
+      - name: Full Name
+        role: Photographer
+      - name: Full Name
+        role: Social Media
+
+  - title: Website
+    people:
+      - name: Full Name
+        role: Website Developer
