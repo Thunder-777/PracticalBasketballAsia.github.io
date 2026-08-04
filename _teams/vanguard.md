@@ -1,0 +1,4 @@
+---
+title: vanguard
+slug: vanguard
+---

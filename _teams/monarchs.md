@@ -1,0 +1,4 @@
+---
+title: monarchs
+slug: monarchs
+---

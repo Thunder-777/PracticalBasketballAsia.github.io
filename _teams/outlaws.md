@@ -1,0 +1,4 @@
+---
+title: outlaws
+slug: outlaws
+---

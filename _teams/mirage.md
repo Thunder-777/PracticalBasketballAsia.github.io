@@ -1,0 +1,4 @@
+---
+title: mirage
+slug: mirage
+---
