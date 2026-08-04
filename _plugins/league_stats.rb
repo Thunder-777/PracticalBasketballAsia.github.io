@@ -78,6 +78,11 @@ module LeagueStats
       stats.each_value { |line| finalize_averages(line) }
 
       site.data['stats'] = stats
+      # Liquid's `sort` / `where_exp` filters expect an Array (they mangle a
+      # Hash into [key, value] pairs). Keep `stats` as a Hash for id lookups
+      # like site.data.stats[game.mvp], and use `stats_list` for anything
+      # that needs to be sorted or filtered.
+      site.data['stats_list'] = stats.values
       site.data['leaderboard'] = stats.values.sort_by { |l| [-l['mvp_count'], -l['avgs']['pts']] }
       site.data['records'] = {
         'league' => build_record_book(stats.values, players_by_id, games),
