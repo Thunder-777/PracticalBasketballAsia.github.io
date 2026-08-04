@@ -15,7 +15,11 @@ title: Standings
       {% for s in sorted_standings %}
         {% assign team = site.data.teams | where: "slug", s.slug | first %}
         {% assign total = s.wins | plus: s.losses %}
-        {% assign pct = s.wins | divided_by: total | times: 1000.0 | round %}
+        {% if total == 0 %}
+          {% assign pct = 0 %}
+        {% else %}
+          {% assign pct = s.wins | divided_by: total | times: 1000.0 | round %}
+        {% endif %}
         {% assign gb_wins = leader.wins | minus: s.wins %}
         {% assign gb_losses = s.losses | minus: leader.losses %}
         {% assign gb = gb_wins | plus: gb_losses | divided_by: 2.0 %}
