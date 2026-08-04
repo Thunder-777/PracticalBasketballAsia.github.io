@@ -4,14 +4,14 @@
 # and must match the filename in /_teams/ (e.g. slug "comets"
 # matches /_teams/comets.md) and the key used in players.yml & games.yml.
 # ─────────────────────────────────────────────────────────
-- slug: comets
-  city: Cascade
-  name: Comets
+- slug: shohoku
+  city: Shohoku
+  name: High
   abbr: CAS
-  primary: "#2E86AB"
-  secondary: "#F2A900"
-  gm: Jordan Reyes
-  arena: Riverside Arena
+  primary: "#FF0000"
+  secondary: "#000000"
+  gm: Zumi
+  arena: Shohoku Stadium
 
 - slug: foundry
   city: Ironvale
