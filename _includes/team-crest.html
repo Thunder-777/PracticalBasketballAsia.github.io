@@ -1,0 +1,16 @@
+{% assign t = include.team %}
+{% assign size = include.size | default: 96 %}
+<svg class="crest" width="{{ size }}" height="{{ size }}" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ t.city }} {{ t.name }} crest">
+  <defs>
+    <linearGradient id="grad-{{ t.slug }}" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="{{ t.primary }}"/>
+      <stop offset="100%" stop-color="{{ t.secondary }}"/>
+    </linearGradient>
+  </defs>
+  <path d="M48 2 L92 20 V54 C92 76 74 90 48 94 C22 90 4 76 4 54 V20 Z"
+        fill="url(#grad-{{ t.slug }})" stroke="#14110F" stroke-width="3"/>
+  <path d="M48 8 L86 24 V53 C86 72 70 84 48 88 C26 84 10 72 10 53 V24 Z"
+        fill="none" stroke="#14110F" stroke-opacity="0.35" stroke-width="1.5"/>
+  <text x="48" y="60" text-anchor="middle" font-family="Teko, sans-serif" font-weight="700"
+        font-size="40" fill="#14110F" fill-opacity="0.92">{{ t.abbr }}</text>
+</svg>

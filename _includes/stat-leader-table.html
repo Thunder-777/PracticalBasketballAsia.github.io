@@ -1,0 +1,22 @@
+<table class="stat-table">
+  <thead>
+    <tr><th>#</th><th>Player</th><th>Team</th><th>Pos</th><th>{{ include.label }}</th></tr>
+  </thead>
+  <tbody>
+    {% for p in include.players limit: 8 %}
+      {% assign team = site.data.teams | where: "slug", p.team | first %}
+      {% assign value = p[include.stat] %}
+      <tr>
+        <td class="rank">{{ forloop.index }}</td>
+        <td><a href="{{ '/players/' | append: p.id | append: '/' | relative_url }}">{{ p.name }}</a></td>
+        <td>
+          <a href="{{ '/teams/' | append: team.slug | append: '/' | relative_url }}" class="team-cell">
+            <span class="dot" style="background:{{ team.primary }}"></span>{{ team.abbr }}
+          </a>
+        </td>
+        <td class="mono">{{ p.pos }}</td>
+        <td class="mono">{{ value }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

@@ -1,0 +1,50 @@
+{% assign book = include.book %}
+{% assign categories = "pts,reb,oreb,dreb,ast,blk,tov,fouls" | split: "," %}
+{% assign labels = "Points,Rebounds,Offensive Rebounds,Defensive Rebounds,Assists,Blocks,Turnovers,Fouls" | split: "," %}
+
+{% for cat in categories %}
+  {% assign label = labels[forloop.index0] %}
+  {% assign data = book[cat] %}
+  <h3 class="section-title" style="font-size:22px; margin-top: 32px;">{{ label }}</h3>
+  <div class="records-grid">
+    <div class="record-card">
+      <h4>Most {{ label }} (Career)</h4>
+      {% for r in data.career limit: 3 %}
+        {% assign t = site.data.teams | where: "slug", r.team | first %}
+        <div class="record-row"><span class="rv">{{ r.value }}</span><a href="{{ '/players/' | append: r.player | append: '/' | relative_url }}">{{ r.name }}</a><span class="rt">{{ t.abbr }}</span></div>
+      {% endfor %}
+    </div>
+    <div class="record-card">
+      <h4>Most {{ label }} (Single Game)</h4>
+      {% for r in data.game limit: 3 %}
+        {% assign t = site.data.teams | where: "slug", r.team | first %}
+        <div class="record-row"><span class="rv">{{ r.value }}</span><a href="{{ '/games/' | append: r.game_id | append: '/' | relative_url }}">{{ r.name }}</a><span class="rt">{{ t.abbr }}</span></div>
+      {% endfor %}
+    </div>
+    <div class="record-card">
+      <h4>Most {{ label }} Per Game</h4>
+      {% for r in data.avg limit: 3 %}
+        {% assign t = site.data.teams | where: "slug", r.team | first %}
+        <div class="record-row"><span class="rv">{{ r.value }}</span><a href="{{ '/players/' | append: r.player | append: '/' | relative_url }}">{{ r.name }}</a><span class="rt">{{ t.abbr }}</span></div>
+      {% endfor %}
+    </div>
+  </div>
+{% endfor %}
+
+<h3 class="section-title" style="font-size:22px; margin-top: 32px;">Awards</h3>
+<div class="records-grid">
+  <div class="record-card">
+    <h4>Most MVPs</h4>
+    {% for r in book.mvp limit: 3 %}
+      {% assign t = site.data.teams | where: "slug", r.team | first %}
+      <div class="record-row"><span class="rv">{{ r.value }}</span><a href="{{ '/players/' | append: r.player | append: '/' | relative_url }}">{{ r.name }}</a><span class="rt">{{ t.abbr }}</span></div>
+    {% endfor %}
+  </div>
+  <div class="record-card">
+    <h4>Most LMVPs</h4>
+    {% for r in book.lmvp limit: 3 %}
+      {% assign t = site.data.teams | where: "slug", r.team | first %}
+      <div class="record-row"><span class="rv">{{ r.value }}</span><a href="{{ '/players/' | append: r.player | append: '/' | relative_url }}">{{ r.name }}</a><span class="rt">{{ t.abbr }}</span></div>
+    {% endfor %}
+  </div>
+</div>
