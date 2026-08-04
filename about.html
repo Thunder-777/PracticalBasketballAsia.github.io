@@ -1,0 +1,22 @@
+---
+layout: default
+title: About Us
+---
+<section class="wrap section">
+  <h2 class="section-title">About Us</h2>
+  <p class="hero-sub">{{ site.data.about.intro | strip_newlines }}</p>
+</section>
+
+{% for group in site.data.about.groups %}
+<section class="wrap section">
+  <h3 class="about-group-title">{{ group.title }}</h3>
+  <div class="about-grid">
+    {% for person in group.people %}
+      <div class="about-card">
+        <span class="about-card-name">{{ person.name }}</span>
+        <span class="about-card-role">{{ person.role }}</span>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
