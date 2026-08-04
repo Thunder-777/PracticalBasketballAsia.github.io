@@ -1,0 +1,308 @@
+# ─────────────────────────────────────────────────────────
+# PLAYERS (roster info only -- no stats live here anymore)
+# id must be unique and is what box scores reference.
+# team must match a slug in teams.yml.
+# To add a player: add an entry here with a new id.
+# To retire/cut a player: delete their entry (their historical
+# box-score stats stay in games.yml and still count for records).
+# ─────────────────────────────────────────────────────────
+- id: deshawn-riley
+  name: Deshawn Riley
+  team: comets
+  pos: PG
+  num: 3
+- id: aaron-reyes
+  name: Aaron Reyes
+  team: comets
+  pos: SG
+  num: 1
+- id: tomas-bricker
+  name: Tomas Bricker
+  team: comets
+  pos: SF
+  num: 21
+- id: hugo-vance
+  name: Hugo Vance
+  team: comets
+  pos: PF
+  num: 15
+- id: miles-okafor
+  name: Miles Okafor
+  team: comets
+  pos: C
+  num: 55
+- id: emmett-sutter
+  name: Emmett Sutter
+  team: foundry
+  pos: PG
+  num: 47
+- id: andre-voss
+  name: Andre Voss
+  team: foundry
+  pos: SG
+  num: 11
+- id: xavier-landers
+  name: Xavier Landers
+  team: foundry
+  pos: SF
+  num: 57
+- id: nate-halloran
+  name: Nate Halloran
+  team: foundry
+  pos: PF
+  num: 44
+- id: cade-boone
+  name: Cade Boone
+  team: foundry
+  pos: C
+  num: 37
+- id: kian-ashford
+  name: Kian Ashford
+  team: wolves
+  pos: PG
+  num: 7
+- id: sean-larkspur
+  name: Sean Larkspur
+  team: wolves
+  pos: SG
+  num: 1
+- id: theo-doyle
+  name: Theo Doyle
+  team: wolves
+  pos: SF
+  num: 14
+- id: griffin-jarrett
+  name: Griffin Jarrett
+  team: wolves
+  pos: PF
+  num: 35
+- id: bo-tanaka
+  name: Bo Tanaka
+  team: wolves
+  pos: C
+  num: 33
+- id: cole-monk
+  name: Cole Monk
+  team: mirage
+  pos: PG
+  num: 41
+- id: felix-hollis
+  name: Felix Hollis
+  team: mirage
+  pos: SG
+  num: 26
+- id: julian-marsh
+  name: Julian Marsh
+  team: mirage
+  pos: SF
+  num: 8
+- id: emmett-denton
+  name: Emmett Denton
+  team: mirage
+  pos: PF
+  num: 37
+- id: isaiah-pruitt
+  name: Isaiah Pruitt
+  team: mirage
+  pos: C
+  num: 55
+- id: marcus-osei
+  name: Marcus Osei
+  team: current
+  pos: PG
+  num: 51
+- id: eli-sandoval
+  name: Eli Sandoval
+  team: current
+  pos: SG
+  num: 2
+- id: reggie-monk
+  name: Reggie Monk
+  team: current
+  pos: SF
+  num: 27
+- id: nico-vance
+  name: Nico Vance
+  team: current
+  pos: PF
+  num: 9
+- id: cole-osei
+  name: Cole Osei
+  team: current
+  pos: C
+  num: 21
+- id: xavier-boone
+  name: Xavier Boone
+  team: vanguard
+  pos: PG
+  num: 24
+- id: xavier-hobbes
+  name: Xavier Hobbes
+  team: vanguard
+  pos: SG
+  num: 54
+- id: braxton-jarrett
+  name: Braxton Jarrett
+  team: vanguard
+  pos: SF
+  num: 16
+- id: rowan-pierce
+  name: Rowan Pierce
+  team: vanguard
+  pos: PF
+  num: 40
+- id: jasper-larkspur
+  name: Jasper Larkspur
+  team: vanguard
+  pos: C
+  num: 46
+- id: grady-holt
+  name: Grady Holt
+  team: outlaws
+  pos: PG
+  num: 5
+- id: damon-hollis
+  name: Damon Hollis
+  team: outlaws
+  pos: SG
+  num: 7
+- id: niles-trask
+  name: Niles Trask
+  team: outlaws
+  pos: SF
+  num: 35
+- id: trey-quill
+  name: Trey Quill
+  team: outlaws
+  pos: PF
+  num: 40
+- id: wyatt-stavros
+  name: Wyatt Stavros
+  team: outlaws
+  pos: C
+  num: 55
+- id: braxton-isham
+  name: Braxton Isham
+  team: aviators
+  pos: PG
+  num: 12
+- id: felix-boone
+  name: Felix Boone
+  team: aviators
+  pos: SG
+  num: 2
+- id: corey-rourke
+  name: Corey Rourke
+  team: aviators
+  pos: SF
+  num: 49
+- id: trey-boone
+  name: Trey Boone
+  team: aviators
+  pos: PF
+  num: 54
+- id: silas-vance
+  name: Silas Vance
+  team: aviators
+  pos: C
+  num: 50
+- id: emmett-rand
+  name: Emmett Rand
+  team: embers
+  pos: PG
+  num: 6
+- id: cody-marsh
+  name: Cody Marsh
+  team: embers
+  pos: SG
+  num: 9
+- id: levi-vance
+  name: Levi Vance
+  team: embers
+  pos: SF
+  num: 29
+- id: aaron-quill
+  name: Aaron Quill
+  team: embers
+  pos: PF
+  num: 23
+- id: reggie-hobbes
+  name: Reggie Hobbes
+  team: embers
+  pos: C
+  num: 22
+- id: cole-landers
+  name: Cole Landers
+  team: monarchs
+  pos: PG
+  num: 17
+- id: felix-tolliver
+  name: Felix Tolliver
+  team: monarchs
+  pos: SG
+  num: 43
+- id: perry-nakamura
+  name: Perry Nakamura
+  team: monarchs
+  pos: SF
+  num: 14
+- id: aaron-boone
+  name: Aaron Boone
+  team: monarchs
+  pos: PF
+  num: 38
+- id: aaron-kessler
+  name: Aaron Kessler
+  team: monarchs
+  pos: C
+  num: 34
+- id: bennett-cole
+  name: Bennett Cole
+  team: drift
+  pos: PG
+  num: 1
+- id: hugo-rourke
+  name: Hugo Rourke
+  team: drift
+  pos: SG
+  num: 10
+- id: damon-trask
+  name: Damon Trask
+  team: drift
+  pos: SF
+  num: 17
+- id: niles-kilbride
+  name: Niles Kilbride
+  team: drift
+  pos: PF
+  num: 44
+- id: cade-rourke
+  name: Cade Rourke
+  team: drift
+  pos: C
+  num: 43
+- id: nico-quill
+  name: Nico Quill
+  team: sentinels
+  pos: PG
+  num: 49
+- id: ivan-larkspur
+  name: Ivan Larkspur
+  team: sentinels
+  pos: SG
+  num: 14
+- id: kellan-larkspur
+  name: Kellan Larkspur
+  team: sentinels
+  pos: SF
+  num: 51
+- id: owen-castellan
+  name: Owen Castellan
+  team: sentinels
+  pos: PF
+  num: 32
+- id: nico-trask
+  name: Nico Trask
+  team: sentinels
+  pos: C
+  num: 17

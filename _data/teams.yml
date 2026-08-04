@@ -1,0 +1,115 @@
+# ─────────────────────────────────────────────────────────
+# TEAM DATA
+# One entry per franchise. "slug" must be lowercase, no spaces,
+# and must match the filename in /_teams/ (e.g. slug "comets"
+# matches /_teams/comets.md) and the key used in players.yml & games.yml.
+# ─────────────────────────────────────────────────────────
+- slug: comets
+  city: Cascade
+  name: Comets
+  abbr: CAS
+  primary: "#2E86AB"
+  secondary: "#F2A900"
+  gm: Jordan Reyes
+  arena: Riverside Arena
+
+- slug: foundry
+  city: Ironvale
+  name: Foundry
+  abbr: IRV
+  primary: "#C8352D"
+  secondary: "#1F1A16"
+  gm: Marcus Webb
+  arena: The Forge
+
+- slug: wolves
+  city: Timberline
+  name: Wolves
+  abbr: TBL
+  primary: "#3C8B5C"
+  secondary: "#F5F3EE"
+  gm: Priya Anand
+  arena: North Ridge Center
+
+- slug: mirage
+  city: Solano
+  name: Mirage
+  abbr: SOL
+  primary: "#E0761C"
+  secondary: "#1F1A16"
+  gm: Devon Cole
+  arena: Sundome
+
+- slug: current
+  city: Port Halden
+  name: Current
+  abbr: PHN
+  primary: "#1F6F8B"
+  secondary: "#F5F3EE"
+  gm: Sam Ortiz
+
+  arena: Harbor Court
+
+- slug: vanguard
+  city: Sterling
+  name: Vanguard
+  abbr: STG
+  primary: "#5B4B8A"
+  secondary: "#F2A900"
+  gm: Alex Kim
+  arena: Union Hall
+
+- slug: outlaws
+  city: Redrock
+  name: Outlaws
+  abbr: RDR
+  primary: "#A6321E"
+  secondary: "#F5F3EE"
+  gm: Casey Fuentes
+  arena: Canyon Arena
+
+- slug: aviators
+  city: Highfield
+  name: Aviators
+  abbr: HFD
+  primary: "#2C4770"
+  secondary: "#F2A900"
+  gm: Riley Chapman
+  arena: Skyline Hangar
+
+- slug: embers
+  city: Ashcroft
+  name: Embers
+  abbr: ASH
+  primary: "#D9491A"
+  secondary: "#1F1A16"
+  gm: Noah Park
+  arena: Kiln House
+
+- slug: monarchs
+  city: Bellmont
+  name: Monarchs
+  abbr: BLM
+  primary: "#7A1F3D"
+  secondary: "#F2A900"
+  gm: Taylor Brooks
+  arena: Bellmont Palace
+
+- slug: drift
+  city: Northshore
+  name: Drift
+  abbr: NSH
+  primary: "#1B7A72"
+  secondary: "#F5F3EE"
+  gm: Morgan Yu
+
+  arena: Tidewater Center
+
+- slug: sentinels
+  city: Argent
+  name: Sentinels
+  abbr: ARG
+  primary: "#3A3A3A"
+  secondary: "#F2A900"
+  gm: Jamie Ellison
+  arena: Watchtower Arena
