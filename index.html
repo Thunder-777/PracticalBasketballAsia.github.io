@@ -47,7 +47,11 @@ title: Home
       {% for s in sorted_standings limit: 5 %}
         {% assign team = site.data.teams | where: "slug", s.slug | first %}
         {% assign total = s.wins | plus: s.losses %}
-        {% assign pct = s.wins | divided_by: total | times: 1000.0 | round %}
+        {% if total == 0 %}
+          {% assign pct = 0 %}
+        {% else %}
+          {% assign pct = s.wins | divided_by: total | times: 1000.0 | round %}
+        {% endif %}
         <tr>
           <td class="rank">{{ forloop.index }}</td>
           <td>
