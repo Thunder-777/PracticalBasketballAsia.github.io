@@ -1,4 +1,0 @@
----
-title: comets
-slug: comets
----
