@@ -181,41 +181,41 @@
   team: outlaws
   pos: C
   num: 55
-- id: braxton-isham
-  name: Braxton Isham
-  team: aviators
+- id: arch
+  name: Arch (@Eeppiiccppllayyeerr)
+  team: beijingducks
   pos: PG
-  num: 12
-- id: felix-boone
-  name: Felix Boone
-  team: aviators
+  num: 1
+- id: jobs
+  name: Jobs (@Vsupereal)
+  team: beijingducks
   pos: SG
   num: 2
-- id: corey-rourke
-  name: Corey Rourke
-  team: aviators
+- id: gorxy
+  name: Gorxy (@helppppmeeeeeeeeeeee)
+  team: beijingducks
   pos: SF
-  num: 49
-- id: trey-boone
-  name: Trey Boone
-  team: aviators
+  num: 3
+- id: juno
+  name: Juno (@junobye123)
+  team: beijingducks
   pos: PF
-  num: 54
-- id: silas-vance
-  name: Silas Vance
-  team: aviators
+  num: 4
+- id: benjermin
+  name: Benjermin (@pooblord12344)
+  team: beijingducks
   pos: C
-  num: 50
-- id: emmett-rand
-  name: Emmett Rand
-  team: embers
-  pos: PG
-  num: 6
-- id: cody-marsh
-  name: Cody Marsh
-  team: embers
+  num: 5
+- id: rosby
+  name: Rosby (@InfiniteSpeedyWarl)
+  team: beijingducks
   pos: SG
-  num: 9
+  num: 6
+- id: thunder
+  name: Thunder (DatThunderNoob)
+  team: beijingducks
+  pos: C
+  num: 7
 - id: levi-vance
   name: Levi Vance
   team: embers
