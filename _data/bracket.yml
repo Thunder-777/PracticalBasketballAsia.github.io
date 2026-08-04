@@ -1,0 +1,84 @@
+# ─────────────────────────────────────────────────────────
+# DOUBLE-ELIMINATION BRACKET
+#
+# This is a worked 4-team example (comets, foundry, wolves, mirage)
+# so you can see the mechanics before scaling it up to your 12 real
+# teams. Nothing here affects standings/stats -- it's purely for the
+# /bracket.html page.
+#
+# HOW A MATCH WORKS:
+#   id          - unique, used by winner_to/loser_to to wire matches together
+#   round       - display label, matches in the same round are grouped
+#                 into one column on the bracket page
+#   home_seed / away_seed
+#               - a team slug (must exist in teams.yml), OR null if that
+#                 slot gets filled automatically by a feeder match
+#   game_id     - null until the match is played. Once played, add a
+#                 normal entry to games.yml (same id) with played: true,
+#                 home_score/away_score, and the box score -- then set
+#                 game_id here to that same id. The winner/loser are
+#                 read from home_score vs away_score.
+#   winner_to   - id of the match the winner advances to (null = it's
+#                 the last match, e.g. a final)
+#   loser_to    - id of the match the loser drops into (null = eliminated)
+#
+# A BYE: give home_seed a team, leave away_seed AND game_id both null.
+# That team auto-advances with no game played.
+#
+# To extend this to 12 teams: round to the nearest bracket size (16,
+# with 4 byes for your top 4 seeds), add more matches per round
+# following the same winner_to/loser_to pattern, and make sure every
+# losers-bracket round is fed by (a) the previous losers round's
+# winners and (b) that round's winners-bracket losers. Happy to
+# generate the full 12/16-slot version for you once you've picked
+# your seeding order.
+# ─────────────────────────────────────────────────────────
+
+winners:
+  - id: wb-r1-m1
+    round: "Winners Round 1"
+    home_seed: comets
+    away_seed: foundry
+    game_id: null
+    winner_to: wb-final
+    loser_to: lb-r1-m1
+
+  - id: wb-r1-m2
+    round: "Winners Round 1"
+    home_seed: wolves
+    away_seed: mirage
+    game_id: null
+    winner_to: wb-final
+    loser_to: lb-r1-m1
+
+  - id: wb-final
+    round: "Winners Final"
+    home_seed: null   # winner of wb-r1-m1
+    away_seed: null   # winner of wb-r1-m2
+    game_id: null
+    winner_to: grand-final
+    loser_to: lb-final
+
+losers:
+  - id: lb-r1-m1
+    round: "Losers Round 1"
+    home_seed: null   # loser of wb-r1-m1
+    away_seed: null   # loser of wb-r1-m2
+    game_id: null
+    winner_to: lb-final
+    loser_to: null    # eliminated
+
+  - id: lb-final
+    round: "Losers Final"
+    home_seed: null   # winner of lb-r1-m1
+    away_seed: null   # loser of wb-final
+    game_id: null
+    winner_to: grand-final
+    loser_to: null    # eliminated
+
+grand_final:
+  id: grand-final
+  round: "Grand Final"
+  home_seed: null   # winners bracket champion (undefeated so far)
+  away_seed: null   # losers bracket champion (has one loss)
+  game_id: null
