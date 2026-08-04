@@ -7,7 +7,7 @@
 - slug: shohoku
   city: Shohoku
   name: High
-  abbr: CAS
+  abbr: SHH
   primary: "#FF0000"
   secondary: "#000000"
   gm: Zumi
@@ -40,13 +40,13 @@
   gm: Devon Cole
   arena: Sundome
 
-- slug: current
-  city: Port Halden
-  name: Current
-  abbr: PHN
-  primary: "#1F6F8B"
-  secondary: "#F5F3EE"
-  gm: Sam Ortiz
+- slug: nutella
+  city: Nutella
+  name: Franchise
+  abbr: NTL
+  primary: "#964B00"
+  secondary: "#8B4513"
+  gm: ae_man
 
   arena: Harbor Court
 
