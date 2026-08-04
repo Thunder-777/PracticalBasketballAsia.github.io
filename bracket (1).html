@@ -1,0 +1,45 @@
+---
+layout: default
+title: Bracket
+---
+<section class="wrap section">
+  <h2 class="section-title">Winners Bracket</h2>
+  <div class="bracket">
+    {% assign wb_rounds = site.data.bracket_resolved.winners | group_by: "round" %}
+    {% for round in wb_rounds %}
+      <div class="bracket-col">
+        <h3 class="bracket-round-title">{{ round.name }}</h3>
+        {% for m in round.items %}
+          {% include bracket-match.html match=m %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Losers Bracket</h2>
+  <div class="bracket">
+    {% assign lb_rounds = site.data.bracket_resolved.losers | group_by: "round" %}
+    {% for round in lb_rounds %}
+      <div class="bracket-col">
+        <h3 class="bracket-round-title">{{ round.name }}</h3>
+        {% for m in round.items %}
+          {% include bracket-match.html match=m %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% if site.data.bracket_resolved.grand_final %}
+<section class="wrap section">
+  <h2 class="section-title">Grand Final</h2>
+  <div class="bracket">
+    <div class="bracket-col">
+      <h3 class="bracket-round-title">{{ site.data.bracket_resolved.grand_final.round }}</h3>
+      {% include bracket-match.html match=site.data.bracket_resolved.grand_final %}
+    </div>
+  </div>
+</section>
+{% endif %}
