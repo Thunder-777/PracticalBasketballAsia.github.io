@@ -2,12 +2,12 @@
 layout: default
 title: Stats
 ---
-{% assign by_ppg = site.data.stats | sort: "ppg" | reverse %}
-{% assign by_rpg = site.data.stats | sort: "rpg" | reverse %}
-{% assign by_apg = site.data.stats | sort: "apg" | reverse %}
-{% assign by_bpg = site.data.stats | sort: "bpg" | reverse %}
-{% assign by_dd = site.data.stats | sort: "double_doubles" | reverse %}
-{% assign by_td = site.data.stats | sort: "triple_doubles" | reverse %}
+{% assign by_ppg = site.data.stats_list | sort: "ppg" | reverse %}
+{% assign by_rpg = site.data.stats_list | sort: "rpg" | reverse %}
+{% assign by_apg = site.data.stats_list | sort: "apg" | reverse %}
+{% assign by_bpg = site.data.stats_list | sort: "bpg" | reverse %}
+{% assign by_dd = site.data.stats_list | sort: "double_doubles" | reverse %}
+{% assign by_td = site.data.stats_list | sort: "triple_doubles" | reverse %}
 
 <section class="wrap section">
   <h2 class="section-title">Points Per Game</h2>
