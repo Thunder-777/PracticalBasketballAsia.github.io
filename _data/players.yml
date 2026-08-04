@@ -106,31 +106,36 @@
   team: mirage
   pos: C
   num: 55
-- id: marcus-osei
-  name: Marcus Osei
-  team: current
+- id: siwoo
+  name: Siwoo (@popAWWMAN_Thailand)
+  team: nutella
   pos: PG
-  num: 51
-- id: eli-sandoval
-  name: Eli Sandoval
-  team: current
-  pos: SG
-  num: 2
-- id: reggie-monk
-  name: Reggie Monk
-  team: current
+  num: 1
+- id: goldi
+  name: Goldi (@WeplayRobloxEveryear)
+  team: nutella
   pos: SF
-  num: 27
-- id: nico-vance
-  name: Nico Vance
-  team: current
+  num: 3
+- id: raphy
+  name: Ray (@Raphy_Taphy123)
+  team: nutella
+  pos: PF
+  num: 51
+- id: aeman
+  name: ae_man (@aemanreal)
+  team: nutella
+  pos: C
+  num: 5
+- id: sewr
+  name: swr (@c4ol_life)
+  team: nutella
+  pos: C
+  num: 28
+- id: butter
+  name: L4R (@Saratedbutter)
+  team: nutella
   pos: PF
   num: 9
-- id: cole-osei
-  name: Cole Osei
-  team: current
-  pos: C
-  num: 21
 - id: xavier-boone
   name: Xavier Boone
   team: vanguard
