@@ -93,9 +93,112 @@ module LeagueStats
 
       generate_game_pages(site, games, players_by_id)
       generate_player_pages(site, players, stats, played_games)
+      build_bracket(site)
     end
 
     private
+
+    ##
+    # Resolves _data/bracket.yml into site.data['bracket_resolved'].
+    #
+    # bracket.yml lists matches with home_seed/away_seed (a team slug, or
+    # null if that slot is filled by a feeder match's winner/loser),
+    # winner_to / loser_to (the id of the match the winner/loser advances
+    # to, or null if there's nowhere to advance -- eliminated, or it's the
+    # last match), and an optional game_id linking to the real result in
+    # games.yml.
+    #
+    # A match with a home_seed, no away_seed, and no game_id is a bye:
+    # the home team auto-advances, no game needed.
+    ##
+    def build_bracket(site)
+      data = site.data['bracket']
+      return unless data
+
+      teams_by_slug = {}
+      (site.data['teams'] || []).each { |t| teams_by_slug[t['slug']] = t }
+
+      games_by_id = {}
+      (site.data['games'] || []).each { |g| games_by_id[g['id']] = g }
+
+      matches = {}
+      %w[winners losers].each do |section|
+        (data[section] || []).each do |m|
+          matches[m['id']] = m.merge(
+            'bracket' => section,
+            'home_resolved' => m['home_seed'],
+            'away_resolved' => m['away_seed']
+          )
+        end
+      end
+      if data['grand_final']
+        gf = data['grand_final']
+        matches[gf['id']] = gf.merge(
+          'bracket' => 'grand_final',
+          'home_resolved' => gf['home_seed'],
+          'away_resolved' => gf['away_seed']
+        )
+      end
+
+      place = lambda do |match_id, team_slug|
+        return if match_id.nil? || team_slug.nil?
+        m = matches[match_id]
+        return unless m
+        return if m['home_resolved'] == team_slug || m['away_resolved'] == team_slug
+        if m['home_resolved'].nil?
+          m['home_resolved'] = team_slug
+        elsif m['away_resolved'].nil?
+          m['away_resolved'] = team_slug
+        end
+      end
+
+      # Repeated sweeps let results propagate through the bracket
+      # regardless of the order matches happen to appear in the yaml.
+      # 20 sweeps comfortably covers any realistic bracket depth.
+      20.times do
+        matches.each_value do |m|
+          home = m['home_resolved']
+          away = m['away_resolved']
+          winner = nil
+          loser = nil
+
+          if home && away.nil? && m['game_id'].nil?
+            winner = home # bye
+          elsif m['game_id'] && (g = games_by_id[m['game_id']]) && g['played']
+            if g['home_score'].to_i > g['away_score'].to_i
+              winner, loser = g['home'], g['away']
+            else
+              winner, loser = g['away'], g['home']
+            end
+          end
+
+          m['winner'] = winner
+          m['loser'] = loser
+          place.call(m['winner_to'], winner) if winner
+          place.call(m['loser_to'], loser) if loser
+        end
+      end
+
+      matches.each_value do |m|
+        m['home_team'] = m['home_resolved'] ? teams_by_slug[m['home_resolved']] : nil
+        m['away_team'] = m['away_resolved'] ? teams_by_slug[m['away_resolved']] : nil
+        m['game'] = m['game_id'] ? games_by_id[m['game_id']] : nil
+        m['status'] =
+          if m['winner']
+            (m['away_resolved'].nil? && m['game_id'].nil?) ? 'bye' : 'final'
+          elsif m['home_resolved'] && m['away_resolved']
+            'ready'
+          else
+            'tbd'
+          end
+      end
+
+      site.data['bracket_resolved'] = {
+        'winners' => (data['winners'] || []).map { |m| matches[m['id']] },
+        'losers' => (data['losers'] || []).map { |m| matches[m['id']] },
+        'grand_final' => data['grand_final'] ? matches[data['grand_final']['id']] : nil
+      }
+    end
 
     def blank_stat_line(player)
       {
