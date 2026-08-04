@@ -13,31 +13,31 @@ intro: >
 groups:
   - title: Commissioner
     people:
-      - name: Full Name
+      - name: ItzSunMoon
         role: Commissioner
 
   - title: Co-Commissioners
     people:
-      - name: Full Name
+      - name: Yan (@yxn19)
         role: Co-Commissioner
-      - name: Full Name
+      - name: Benjermin (@degeneres)
         role: Co-Commissioner
 
   - title: Referees
     people:
-      - name: Full Name
+      - name: aeman
         role: Head Referee
-      - name: Full Name
+      - name: Placeholder
         role: Referee
 
   - title: Media Team
     people:
-      - name: Full Name
+      - name: Placeholder
         role: Photographer
-      - name: Full Name
+      - name: Placeholder
         role: Social Media
 
   - title: Website
     people:
-      - name: Full Name
+      - name: Thunder (@thunderthegoat)
         role: Website Developer
