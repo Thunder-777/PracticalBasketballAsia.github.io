@@ -1,0 +1,27 @@
+title: The Association
+tagline: A 12-franchise league, built for the hardwood
+description: Official home of the league — standings, rosters, stats, and news.
+baseurl: "" # IMPORTANT: set this to "/your-repo-name" if this is NOT a username.github.io repo
+url: ""     # IMPORTANT: set this to "https://yourusername.github.io"
+
+season: "2026"
+current_week: 1
+
+collections:
+  teams:
+    output: true
+    permalink: /teams/:slug/
+
+defaults:
+  - scope:
+      path: ""
+      type: "teams"
+    values:
+      layout: "team"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+markdown: kramdown

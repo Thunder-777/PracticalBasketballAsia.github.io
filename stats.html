@@ -1,0 +1,44 @@
+---
+layout: default
+title: Stats
+---
+{% assign by_ppg = site.data.stats | sort: "ppg" | reverse %}
+{% assign by_rpg = site.data.stats | sort: "rpg" | reverse %}
+{% assign by_apg = site.data.stats | sort: "apg" | reverse %}
+{% assign by_bpg = site.data.stats | sort: "bpg" | reverse %}
+{% assign by_dd = site.data.stats | sort: "double_doubles" | reverse %}
+{% assign by_td = site.data.stats | sort: "triple_doubles" | reverse %}
+
+<section class="wrap section">
+  <h2 class="section-title">Points Per Game</h2>
+  {% include stat-leader-table.html players=by_ppg stat="ppg" label="PPG" %}
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Rebounds Per Game</h2>
+  {% include stat-leader-table.html players=by_rpg stat="rpg" label="RPG" %}
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Assists Per Game</h2>
+  {% include stat-leader-table.html players=by_apg stat="apg" label="APG" %}
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Blocks Per Game</h2>
+  {% include stat-leader-table.html players=by_bpg stat="bpg" label="BPG" %}
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Double-Doubles</h2>
+  {% include stat-leader-table.html players=by_dd stat="double_doubles" label="DD" %}
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Triple-Doubles</h2>
+  {% include stat-leader-table.html players=by_td stat="triple_doubles" label="TD" %}
+</section>
+
+<section class="wrap section">
+  <p class="hero-sub">Looking for career highs, single-game bests, and MVP counts? Check the <a href="{{ '/records.html' | relative_url }}" style="color: var(--gold);">Records</a> page, or the <a href="{{ '/players.html' | relative_url }}" style="color: var(--gold);">Player Leaderboard</a> to filter by position or team.</p>
+</section>

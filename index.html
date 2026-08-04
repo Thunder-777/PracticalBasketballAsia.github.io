@@ -1,0 +1,81 @@
+---
+layout: default
+title: Home
+---
+{% assign recent_games = site.data.games | where: "played", true %}
+{% assign upcoming_games = site.data.games | where: "played", false %}
+{% assign sorted_standings = site.data.computed_standings | sort: "wins" | reverse %}
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Season {{ site.season }} &nbsp;·&nbsp; Week {{ site.current_week }}</p>
+    <h1 class="hero-title">{{ site.title }}<br><span>{{ site.tagline }}</span></h1>
+    <p class="hero-sub">{{ site.description }}</p>
+  </div>
+  <div class="ticker">
+    <div class="ticker-track">
+      {% assign ticker_games = recent_games | limit: 12 %}
+      {% for g in ticker_games %}
+        {% assign home = site.data.teams | where: "slug", g.home | first %}
+        {% assign away = site.data.teams | where: "slug", g.away | first %}
+        <a class="ticker-item" href="{{ '/games/' | append: g.id | append: '/' | relative_url }}">
+          <b>{{ away.abbr }} {{ g.away_score }}</b> @
+          <b class="{% if g.home_score > g.away_score %}win{% endif %}">{{ home.abbr }} {{ g.home_score }}</b>
+          — FINAL
+        </a>
+      {% endfor %}
+      {% for g in ticker_games %}
+        {% assign home = site.data.teams | where: "slug", g.home | first %}
+        {% assign away = site.data.teams | where: "slug", g.away | first %}
+        <a class="ticker-item" href="{{ '/games/' | append: g.id | append: '/' | relative_url }}" aria-hidden="true" tabindex="-1">
+          <b>{{ away.abbr }} {{ g.away_score }}</b> @
+          <b class="{% if g.home_score > g.away_score %}win{% endif %}">{{ home.abbr }} {{ g.home_score }}</b>
+          — FINAL
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Standings</h2>
+  <table class="stat-table">
+    <thead>
+      <tr><th>#</th><th>Team</th><th>W</th><th>L</th><th>PCT</th><th>Streak</th></tr>
+    </thead>
+    <tbody>
+      {% for s in sorted_standings limit: 5 %}
+        {% assign team = site.data.teams | where: "slug", s.slug | first %}
+        {% assign total = s.wins | plus: s.losses %}
+        {% assign pct = s.wins | divided_by: total | times: 1000.0 | round %}
+        <tr>
+          <td class="rank">{{ forloop.index }}</td>
+          <td>
+            <a href="{{ '/teams/' | append: team.slug | append: '/' | relative_url }}" class="team-cell">
+              <span class="dot" style="background:{{ team.primary }}"></span>
+              {{ team.city }} {{ team.name }}
+            </a>
+          </td>
+          <td class="mono">{{ s.wins }}</td>
+          <td class="mono">{{ s.losses }}</td>
+          <td class="mono">.{{ pct }}</td>
+          <td class="mono {% if s.streak contains 'W' %}streak-w{% else %}streak-l{% endif %}">{{ s.streak }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p style="margin-top:16px;"><a href="{{ '/standings.html' | relative_url }}" class="back-link">Full standings &rarr;</a></p>
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Latest News</h2>
+  <div class="news-list">
+    {% for post in site.posts limit: 3 %}
+    <div class="news-item">
+      <p class="eyebrow">{{ post.date | date: "%B %-d, %Y" }}</p>
+      <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+      <p class="news-excerpt">{{ post.excerpt | strip_html | truncatewords: 28 }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>

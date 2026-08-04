@@ -1,0 +1,39 @@
+---
+layout: default
+title: Standings
+---
+{% assign sorted_standings = site.data.computed_standings | sort: "wins" | reverse %}
+{% assign leader = sorted_standings | first %}
+
+<section class="wrap section">
+  <h2 class="section-title">League Standings</h2>
+  <table class="stat-table">
+    <thead>
+      <tr><th>#</th><th>Team</th><th>W</th><th>L</th><th>PCT</th><th>GB</th><th>Streak</th></tr>
+    </thead>
+    <tbody>
+      {% for s in sorted_standings %}
+        {% assign team = site.data.teams | where: "slug", s.slug | first %}
+        {% assign total = s.wins | plus: s.losses %}
+        {% assign pct = s.wins | divided_by: total | times: 1000.0 | round %}
+        {% assign gb_wins = leader.wins | minus: s.wins %}
+        {% assign gb_losses = s.losses | minus: leader.losses %}
+        {% assign gb = gb_wins | plus: gb_losses | divided_by: 2.0 %}
+        <tr>
+          <td class="rank">{{ forloop.index }}</td>
+          <td>
+            <a href="{{ '/teams/' | append: team.slug | append: '/' | relative_url }}" class="team-cell">
+              <span class="dot" style="background:{{ team.primary }}"></span>
+              {{ team.city }} {{ team.name }}
+            </a>
+          </td>
+          <td class="mono">{{ s.wins }}</td>
+          <td class="mono">{{ s.losses }}</td>
+          <td class="mono">.{{ pct }}</td>
+          <td class="mono">{% if gb == 0 %}—{% else %}{{ gb }}{% endif %}</td>
+          <td class="mono {% if s.streak contains 'W' %}streak-w{% else %}streak-l{% endif %}">{{ s.streak }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>

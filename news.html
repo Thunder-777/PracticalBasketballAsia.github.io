@@ -1,0 +1,17 @@
+---
+layout: default
+title: News
+---
+<section class="wrap section">
+  <h2 class="section-title">League News</h2>
+  <div class="news-list">
+    {% for post in site.posts %}
+    <div class="news-item">
+      <p class="eyebrow">{{ post.date | date: "%B %-d, %Y" }}</p>
+      <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+      <p class="news-excerpt">{{ post.excerpt | strip_html | truncatewords: 32 }}</p>
+      <a class="back-link" href="{{ post.url | relative_url }}">Read more &rarr;</a>
+    </div>
+    {% endfor %}
+  </div>
+</section>

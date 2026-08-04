@@ -1,0 +1,88 @@
+---
+layout: default
+title: Players
+---
+<section class="wrap section">
+  <h2 class="section-title">MVP Leaderboard</h2>
+  <p class="hero-sub" style="margin-bottom:20px;">Ranked by Game MVP awards. Filter by position or team.</p>
+
+  <div class="filter-bar" id="pos-filters">
+    <button class="filter-pill active" data-pos="all">All</button>
+    <button class="filter-pill" data-pos="PG">PG</button>
+    <button class="filter-pill" data-pos="SG">SG</button>
+    <button class="filter-pill" data-pos="SF">SF</button>
+    <button class="filter-pill" data-pos="PF">PF</button>
+    <button class="filter-pill" data-pos="C">C</button>
+  </div>
+
+  <div class="filter-bar team-select-bar">
+    <select class="filter-select" id="team-filter">
+      <option value="all">All Teams</option>
+      {% assign sorted_teams = site.data.teams | sort: "city" %}
+      {% for team in sorted_teams %}
+        <option value="{{ team.slug }}">{{ team.city }} {{ team.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <table class="stat-table" id="player-table">
+    <thead>
+      <tr><th>#</th><th>Player</th><th>Team</th><th>Pos</th><th>MVP</th><th>LMVP</th><th>PPG</th><th>RPG</th><th>APG</th></tr>
+    </thead>
+    <tbody>
+      {% for line in site.data.leaderboard %}
+        {% assign team = site.data.teams | where: "slug", line.team | first %}
+        <tr data-pos="{{ line.pos }}" data-team="{{ line.team }}">
+          <td class="rank">{{ forloop.index }}</td>
+          <td><a href="{{ '/players/' | append: line.id | append: '/' | relative_url }}">{{ line.name }}</a></td>
+          <td>
+            <a href="{{ '/teams/' | append: team.slug | append: '/' | relative_url }}" class="team-cell">
+              <span class="dot" style="background:{{ team.primary }}"></span>{{ team.abbr }}
+            </a>
+          </td>
+          <td class="mono">{{ line.pos }}</td>
+          <td class="mono">{{ line.mvp_count }}</td>
+          <td class="mono">{{ line.lmvp_count }}</td>
+          <td class="mono">{{ line.avgs.pts }}</td>
+          <td class="mono">{{ line.avgs.reb }}</td>
+          <td class="mono">{{ line.avgs.ast }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p class="filter-empty" id="filter-empty">No players match those filters.</p>
+</section>
+
+<script>
+(function () {
+  var posButtons = document.querySelectorAll('#pos-filters .filter-pill');
+  var teamSelect = document.getElementById('team-filter');
+  var rows = document.querySelectorAll('#player-table tbody tr');
+  var empty = document.getElementById('filter-empty');
+  var activePos = 'all';
+
+  function applyFilters() {
+    var activeTeam = teamSelect.value;
+    var visible = 0;
+    rows.forEach(function (row) {
+      var posMatch = activePos === 'all' || row.getAttribute('data-pos') === activePos;
+      var teamMatch = activeTeam === 'all' || row.getAttribute('data-team') === activeTeam;
+      var show = posMatch && teamMatch;
+      row.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    empty.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  posButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      posButtons.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activePos = btn.getAttribute('data-pos');
+      applyFilters();
+    });
+  });
+
+  teamSelect.addEventListener('change', applyFilters);
+})();
+</script>

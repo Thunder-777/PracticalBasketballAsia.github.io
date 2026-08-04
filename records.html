@@ -1,0 +1,39 @@
+---
+layout: default
+title: Records
+---
+<section class="wrap section">
+  <h2 class="section-title">League Record Book</h2>
+  {% include record-book.html book=site.data.records.league %}
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Team Records</h2>
+  <div class="filter-bar team-select-bar">
+    <select class="filter-select" id="team-record-select">
+      {% assign sorted_teams = site.data.teams | sort: "city" %}
+      {% for team in sorted_teams %}
+        <option value="{{ team.slug }}">{{ team.city }} {{ team.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  {% for team in sorted_teams %}
+    <div class="team-record-block" data-team="{{ team.slug }}" {% unless forloop.first %}style="display:none;"{% endunless %}>
+      {% assign team_book = site.data.records.teams[team.slug] %}
+      {% include record-book.html book=team_book %}
+    </div>
+  {% endfor %}
+</section>
+
+<script>
+(function () {
+  var select = document.getElementById('team-record-select');
+  var blocks = document.querySelectorAll('.team-record-block');
+  select.addEventListener('change', function () {
+    blocks.forEach(function (b) {
+      b.style.display = (b.getAttribute('data-team') === select.value) ? '' : 'none';
+    });
+  });
+})();
+</script>

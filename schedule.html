@@ -1,0 +1,46 @@
+---
+layout: default
+title: Schedule
+---
+<section class="wrap section">
+  <h2 class="section-title">Schedule &amp; Results</h2>
+  <div class="game-list">
+    {% assign sorted_games = site.data.games | sort: "date" | reverse %}
+    {% for g in sorted_games %}
+      {% assign home = site.data.teams | where: "slug", g.home | first %}
+      {% assign away = site.data.teams | where: "slug", g.away | first %}
+      {% if g.played %}
+        {% assign mvp = site.data.stats[g.mvp] %}
+      {% endif %}
+      {% if g.played %}
+      <a class="game-row" href="{{ '/games/' | append: g.id | append: '/' | relative_url }}">
+      {% else %}
+      <div class="game-row">
+      {% endif %}
+        <span class="game-date">{{ g.date | date: "%b %-d" }}</span>
+        <span class="game-team away">
+          {{ away.city }} {{ away.name }}
+          <span class="dot" style="background:{{ away.primary }}"></span>
+        </span>
+        <span class="game-score">
+          {% if g.played %}
+            <span class="{% if g.away_score > g.home_score %}game-winner{% endif %}">{{ g.away_score }}</span>
+            –
+            <span class="{% if g.home_score > g.away_score %}game-winner{% endif %}">{{ g.home_score }}</span>
+            {% if mvp %}<span class="pending">MVP {{ mvp.name }}</span>{% endif %}
+          {% else %}
+            <span class="pending">UPCOMING</span>
+          {% endif %}
+        </span>
+        <span class="game-team home">
+          <span class="dot" style="background:{{ home.primary }}"></span>
+          {{ home.city }} {{ home.name }}
+        </span>
+      {% if g.played %}
+      </a>
+      {% else %}
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
