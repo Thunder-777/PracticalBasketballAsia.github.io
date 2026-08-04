@@ -1,4 +1,0 @@
----
-title: current
-slug: current
----
