@@ -1,0 +1,24 @@
+<div class="bracket-match status-{{ include.match.status }}">
+  <div class="bracket-team {% if include.match.winner and include.match.winner == include.match.home_resolved %}bracket-winner{% endif %}">
+    <span class="bracket-team-name">
+      {% if include.match.home_team %}
+        <span class="dot" style="background:{{ include.match.home_team.primary }}"></span>{{ include.match.home_team.abbr }}
+      {% else %}
+        <span class="bracket-tbd">TBD</span>
+      {% endif %}
+    </span>
+    {% if include.match.game %}<span class="bracket-score">{{ include.match.game.home_score }}</span>{% endif %}
+  </div>
+  <div class="bracket-team {% if include.match.winner and include.match.winner == include.match.away_resolved %}bracket-winner{% endif %}">
+    <span class="bracket-team-name">
+      {% if include.match.away_team %}
+        <span class="dot" style="background:{{ include.match.away_team.primary }}"></span>{{ include.match.away_team.abbr }}
+      {% elsif include.match.status == 'bye' %}
+        <span class="bracket-tbd">BYE</span>
+      {% else %}
+        <span class="bracket-tbd">TBD</span>
+      {% endif %}
+    </span>
+    {% if include.match.game %}<span class="bracket-score">{{ include.match.game.away_score }}</span>{% endif %}
+  </div>
+</div>
