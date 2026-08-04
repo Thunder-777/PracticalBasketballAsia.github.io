@@ -6,36 +6,36 @@
 # To retire/cut a player: delete their entry (their historical
 # box-score stats stay in games.yml and still count for records).
 # ─────────────────────────────────────────────────────────
-- id: deshawn-riley
-  name: Deshawn Riley
-  team: comets
-  pos: PG
-  num: 3
-- id: aaron-reyes
-  name: Aaron Reyes
-  team: comets
-  pos: SG
-  num: 1
-- id: tomas-bricker
-  name: Tomas Bricker
-  team: comets
-  pos: SF
-  num: 21
-- id: hugo-vance
-  name: Hugo Vance
-  team: comets
-  pos: PF
-  num: 15
-- id: miles-okafor
-  name: Miles Okafor
-  team: comets
+- id: akyn
+  name: Akyn (@IQPlayFR)
+  team: shohoku
   pos: C
-  num: 55
-- id: emmett-sutter
-  name: Emmett Sutter
-  team: foundry
+  num: 5
+- id: matrix
+  name: Albee (@Matrixbois132)
+  team: shohoku
+  pos: PF
+  num: 4
+- id: zumi
+  name: Zumi (@Mizukuyo)
+  team: shohoku
   pos: PG
-  num: 47
+  num: 1
+- id: kamado
+  name: Kamado (@kamadoOPn15)
+  team: shohoku
+  pos: SF
+  num: 3
+- id: kami
+  name: Kami (@LiberoAccount2)
+  team: shohoku
+  pos: SG
+  num: 2
+- id: pogba
+  name: Pogba (@Drrraaccco)
+  team: shohoku
+  pos: PF
+  num: 48
 - id: andre-voss
   name: Andre Voss
   team: foundry
