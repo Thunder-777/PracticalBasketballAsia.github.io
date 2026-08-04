@@ -1,0 +1,84 @@
+---
+layout: default
+---
+{% assign player = page.player %}
+{% assign s = page.stat_line %}
+{% assign team = site.data.teams | where: "slug", player.team | first %}
+
+<section class="player-hero" style="--team-primary: {{ team.primary }};">
+  <div class="wrap player-hero-inner">
+    {% include team-crest.html team=team size=72 %}
+    <div>
+      <p class="eyebrow">#{{ player.num }} &nbsp;·&nbsp; {{ player.pos }} &nbsp;·&nbsp; <a href="{{ '/teams/' | append: team.slug | append: '/' | relative_url }}">{{ team.city }} {{ team.name }}</a></p>
+      <h1 class="player-hero-name">{{ player.name }}</h1>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section" id="stats">
+  <h2 class="section-title">Season Averages ({{ s.games }} GP)</h2>
+  <div class="stat-strip">
+    <div class="stat-box"><span class="stat-value">{{ s.avgs.pts }}</span><span class="stat-label">PPG</span></div>
+    <div class="stat-box"><span class="stat-value">{{ s.avgs.reb }}</span><span class="stat-label">RPG</span></div>
+    <div class="stat-box"><span class="stat-value">{{ s.avgs.ast }}</span><span class="stat-label">APG</span></div>
+    <div class="stat-box"><span class="stat-value">{{ s.avgs.blk }}</span><span class="stat-label">BPG</span></div>
+    <div class="stat-box"><span class="stat-value">{{ s.avgs.tov }}</span><span class="stat-label">TOPG</span></div>
+    <div class="stat-box"><span class="stat-value">{{ s.avgs.fouls }}</span><span class="stat-label">FPG</span></div>
+  </div>
+
+  <div class="badge-row">
+    {% if s.mvp_count > 0 %}<span class="badge badge-mvp">MVP ×{{ s.mvp_count }}</span>{% endif %}
+    {% if s.lmvp_count > 0 %}<span class="badge badge-lmvp">LMVP ×{{ s.lmvp_count }}</span>{% endif %}
+    {% if s.double_doubles > 0 %}<span class="badge">Double-Doubles ×{{ s.double_doubles }}</span>{% endif %}
+    {% if s.triple_doubles > 0 %}<span class="badge badge-gold">Triple-Doubles ×{{ s.triple_doubles }}</span>{% endif %}
+  </div>
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Career Highs</h2>
+  <table class="stat-table">
+    <thead><tr><th>Stat</th><th>Value</th><th>Game</th></tr></thead>
+    <tbody>
+      {% for pair in s.highs %}
+        {% if pair[1].value > 0 %}
+        {% assign opp = site.data.teams | where: "slug", pair[1].opponent | first %}
+        <tr>
+          <td class="mono">{{ pair[0] | upcase }}</td>
+          <td class="mono">{{ pair[1].value }}</td>
+          <td>
+            {% if pair[1].game_id %}
+              <a href="{{ '/games/' | append: pair[1].game_id | append: '/' | relative_url }}">vs {{ opp.abbr }} — {{ pair[1].date | date: "%b %-d" }}</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Game Log</h2>
+  <table class="stat-table">
+    <thead><tr><th>Date</th><th>Opp</th><th>Pts</th><th>Reb</th><th>Ast</th><th>Blk</th><th>Tov</th><th>PF</th></tr></thead>
+    <tbody>
+      {% for g in page.game_log %}
+        {% assign opp_slug = g.home %}
+        {% if g.home == player.team %}{% assign opp_slug = g.away %}{% endif %}
+        {% assign opp = site.data.teams | where: "slug", opp_slug | first %}
+        {% assign my_box = g.box[player.team] | where: "player", player.id | first %}
+        {% assign reb = my_box.oreb | plus: my_box.dreb %}
+        <tr>
+          <td><a href="{{ '/games/' | append: g.id | append: '/' | relative_url }}">{{ g.date | date: "%b %-d" }}</a></td>
+          <td class="mono">{{ opp.abbr }}</td>
+          <td class="mono">{{ my_box.pts }}</td>
+          <td class="mono">{{ reb }}</td>
+          <td class="mono">{{ my_box.ast }}</td>
+          <td class="mono">{{ my_box.blk }}</td>
+          <td class="mono">{{ my_box.tov }}</td>
+          <td class="mono">{{ my_box.fouls }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>

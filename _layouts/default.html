@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <div class="grain"></div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="{{ '/' | relative_url }}" class="brand">
+        <span class="brand-mark">●</span>
+        <span class="brand-name">{{ site.title }}</span>
+      </a>
+      <nav class="main-nav">
+        <a href="{{ '/standings.html' | relative_url }}">Standings</a>
+        <a href="{{ '/teams.html' | relative_url }}">Teams</a>
+        <a href="{{ '/schedule.html' | relative_url }}">Schedule</a>
+        <a href="{{ '/stats.html' | relative_url }}">Stats</a>
+        <a href="{{ '/players.html' | relative_url }}">Players</a>
+        <a href="{{ '/records.html' | relative_url }}">Records</a>
+        <a href="{{ '/news.html' | relative_url }}">News</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>{{ site.title }} — Season {{ site.season }}</span>
+      <span class="dim">Built on GitHub Pages</span>
+    </div>
+  </footer>
+</body>
+</html>

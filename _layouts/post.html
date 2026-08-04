@@ -1,0 +1,11 @@
+---
+layout: default
+---
+<article class="wrap section post">
+  <p class="eyebrow">{{ page.date | date: "%B %-d, %Y" }}</p>
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="post-body">
+    {{ content }}
+  </div>
+  <a class="back-link" href="{{ '/news.html' | relative_url }}">&larr; Back to news</a>
+</article>

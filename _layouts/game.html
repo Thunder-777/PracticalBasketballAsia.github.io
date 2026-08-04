@@ -1,0 +1,77 @@
+---
+layout: default
+---
+{% assign game = page.game %}
+{% assign home = site.data.teams | where: "slug", game.home | first %}
+{% assign away = site.data.teams | where: "slug", game.away | first %}
+{% assign mvp = site.data.stats[game.mvp] %}
+{% assign lmvp = site.data.stats[game.lmvp] %}
+
+<section class="wrap section">
+  <p class="eyebrow">{{ game.date | date: "%B %-d, %Y" }} &nbsp;·&nbsp; Final</p>
+  <div class="boxscore-header">
+    <div class="boxscore-team">
+      {% include team-crest.html team=away size=56 %}
+      <div>
+        <div class="boxscore-name">{{ away.city }} {{ away.name }}</div>
+        <div class="boxscore-score {% if game.away_score > game.home_score %}game-winner{% endif %}">{{ game.away_score }}</div>
+      </div>
+    </div>
+    <div class="boxscore-at">@</div>
+    <div class="boxscore-team">
+      {% include team-crest.html team=home size=56 %}
+      <div>
+        <div class="boxscore-name">{{ home.city }} {{ home.name }}</div>
+        <div class="boxscore-score {% if game.home_score > game.away_score %}game-winner{% endif %}">{{ game.home_score }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mvp-strip">
+    {% if mvp %}
+    <div class="mvp-chip">
+      <span class="eyebrow">Game MVP</span>
+      <a href="{{ '/players/' | append: mvp.id | append: '/' | relative_url }}#stats">{{ mvp.name }}</a>
+    </div>
+    {% endif %}
+    {% if lmvp %}
+    <div class="mvp-chip lmvp">
+      <span class="eyebrow">LMVP</span>
+      <a href="{{ '/players/' | append: lmvp.id | append: '/' | relative_url }}#stats">{{ lmvp.name }}</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% for team_slug in game.box %}
+  {% assign t = site.data.teams | where: "slug", team_slug[0] | first %}
+  <section class="wrap section">
+    <h2 class="section-title">{{ t.city }} {{ t.name }}</h2>
+    <table class="stat-table">
+      <thead>
+        <tr><th>Player</th><th>Min</th><th>Pts</th><th>Reb</th><th>Ast</th><th>Blk</th><th>Tov</th><th>PF</th></tr>
+      </thead>
+      <tbody>
+        {% assign sorted_box = team_slug[1] | sort: "pts" | reverse %}
+        {% for entry in sorted_box %}
+          {% assign reb = entry.oreb | plus: entry.dreb %}
+          {% assign pl = site.data.players | where: "id", entry.player | first %}
+          <tr>
+            <td>
+              <a href="{{ '/players/' | append: entry.player | append: '/' | relative_url }}">{{ pl.name }}</a>
+              {% if game.mvp == entry.player %}<span class="badge badge-mvp">MVP</span>{% endif %}
+              {% if game.lmvp == entry.player %}<span class="badge badge-lmvp">LMVP</span>{% endif %}
+            </td>
+            <td class="mono">{{ entry.min }}</td>
+            <td class="mono">{{ entry.pts }}</td>
+            <td class="mono">{{ reb }}</td>
+            <td class="mono">{{ entry.ast }}</td>
+            <td class="mono">{{ entry.blk }}</td>
+            <td class="mono">{{ entry.tov }}</td>
+            <td class="mono">{{ entry.fouls }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endfor %}

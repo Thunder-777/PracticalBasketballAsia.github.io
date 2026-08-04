@@ -1,0 +1,95 @@
+---
+layout: default
+---
+{% assign team = site.data.teams | where: "slug", page.slug | first %}
+{% assign standing = site.data.computed_standings | where: "slug", page.slug | first %}
+{% assign roster_stats = site.data.stats | where_exp: "s", "s.team == page.slug" %}
+{% assign roster_by_ppg = roster_stats | sort: "avgs.pts" | reverse %}
+{% assign team_games = site.data.games | where_exp: "g", "g.played == true" %}
+{% assign team_games = team_games | where_exp: "g", "g.home == page.slug or g.away == page.slug" %}
+
+<section class="team-hero" style="--team-primary: {{ team.primary }}; --team-secondary: {{ team.secondary }};">
+  <div class="wrap team-hero-inner">
+    {% include team-crest.html team=team size=104 %}
+    <div>
+      <p class="eyebrow">{{ team.arena }}</p>
+      <h1 class="team-hero-name">{{ team.city }} <span>{{ team.name }}</span></h1>
+      <p class="team-hero-meta">GM {{ team.gm }} &nbsp;·&nbsp; {{ standing.wins }}–{{ standing.losses }} &nbsp;·&nbsp; Streak {{ standing.streak }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Team Leaders</h2>
+  <div class="stat-strip">
+    {% assign top_scorer = roster_by_ppg | first %}
+    <div class="stat-box">
+      <span class="stat-value">{{ top_scorer.avgs.pts }}</span>
+      <span class="stat-label">PPG — {{ top_scorer.name | split: " " | last }}</span>
+    </div>
+    {% assign roster_by_reb = roster_stats | sort: "avgs.reb" | reverse %}
+    {% assign top_reb = roster_by_reb | first %}
+    <div class="stat-box">
+      <span class="stat-value">{{ top_reb.avgs.reb }}</span>
+      <span class="stat-label">RPG — {{ top_reb.name | split: " " | last }}</span>
+    </div>
+    {% assign roster_by_ast = roster_stats | sort: "avgs.ast" | reverse %}
+    {% assign top_ast = roster_by_ast | first %}
+    <div class="stat-box">
+      <span class="stat-value">{{ top_ast.avgs.ast }}</span>
+      <span class="stat-label">APG — {{ top_ast.name | split: " " | last }}</span>
+    </div>
+    {% assign roster_by_mvp = roster_stats | sort: "mvp_count" | reverse %}
+    {% assign top_mvp = roster_by_mvp | first %}
+    <div class="stat-box">
+      <span class="stat-value">{{ top_mvp.mvp_count }}</span>
+      <span class="stat-label">MVPs — {{ top_mvp.name | split: " " | last }}</span>
+    </div>
+  </div>
+  <p style="margin-top:16px;"><a class="back-link" href="{{ '/records.html' | relative_url }}">Full team record book &rarr;</a></p>
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Roster &amp; Season Averages</h2>
+  <table class="stat-table">
+    <thead>
+      <tr><th>#</th><th>Player</th><th>Pos</th><th>GP</th><th>PPG</th><th>RPG</th><th>APG</th><th>BPG</th><th>MVP</th></tr>
+    </thead>
+    <tbody>
+      {% for p in roster_by_ppg %}
+      <tr>
+        <td class="mono">{{ p.num }}</td>
+        <td><a href="{{ '/players/' | append: p.id | append: '/' | relative_url }}">{{ p.name }}</a></td>
+        <td class="mono">{{ p.pos }}</td>
+        <td class="mono">{{ p.games }}</td>
+        <td class="mono">{{ p.avgs.pts }}</td>
+        <td class="mono">{{ p.avgs.reb }}</td>
+        <td class="mono">{{ p.avgs.ast }}</td>
+        <td class="mono">{{ p.avgs.blk }}</td>
+        <td class="mono">{{ p.mvp_count }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section class="wrap section">
+  <h2 class="section-title">Recent Games</h2>
+  <div class="game-list">
+    {% assign recent = team_games | sort: "date" | reverse %}
+    {% for g in recent limit: 6 %}
+      {% assign home = site.data.teams | where: "slug", g.home | first %}
+      {% assign away = site.data.teams | where: "slug", g.away | first %}
+      <a class="game-row" href="{{ '/games/' | append: g.id | append: '/' | relative_url }}">
+        <span class="game-date">{{ g.date | date: "%b %-d" }}</span>
+        <span class="game-team away">{{ away.city }} {{ away.name }}<span class="dot" style="background:{{ away.primary }}"></span></span>
+        <span class="game-score">
+          <span class="{% if g.away_score > g.home_score %}game-winner{% endif %}">{{ g.away_score }}</span>
+          –
+          <span class="{% if g.home_score > g.away_score %}game-winner{% endif %}">{{ g.home_score }}</span>
+        </span>
+        <span class="game-team home"><span class="dot" style="background:{{ home.primary }}"></span>{{ home.city }} {{ home.name }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
