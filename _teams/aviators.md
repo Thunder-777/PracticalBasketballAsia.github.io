@@ -1,4 +1,4 @@
 ---
-title: aviators
-slug: aviators
+title: Beijing Ducks
+slug: beijingduck
 ---
