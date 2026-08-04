@@ -68,14 +68,14 @@
   gm: Casey Fuentes
   arena: Canyon Arena
 
-- slug: aviators
-  city: Highfield
-  name: Aviators
-  abbr: HFD
-  primary: "#2C4770"
-  secondary: "#F2A900"
-  gm: Riley Chapman
-  arena: Skyline Hangar
+- slug: beijingducks
+  city: Beijing
+  name: Beijing Ducks
+  abbr: BJD
+  primary: "#ADD8E6"
+  secondary: "#FFFFFF"
+  gm: Benjermin
+  arena: Field of Ducks
 
 - slug: embers
   city: Ashcroft
