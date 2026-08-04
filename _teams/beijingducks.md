@@ -1,4 +1,4 @@
 ---
 title: Beijing Ducks
-slug: beijingduck
+slug: beijingducks
 ---
